@@ -4,13 +4,15 @@ import {
   FaRegTrashCan,
   FaMicrophoneLines,
   FaPaperPlane,
-  FaDownload,
+  FaGear,
+  
 } from "react-icons/fa6";
 import Image from "next/image";
 import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import ReactMarkdown from "react-markdown";
 import Markdown from "react-markdown";
+import { PopUp } from "../popup";
 
 
 const BASEURL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -22,6 +24,9 @@ function MainChat(props) {
   const btnRef = useRef(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [streamingMessageId, setStreamingMessageId] = useState(null);
+
+
+  const [popUp, showPopUp] = useState(false)
 
   useEffect(() => {
     if (props?.freqPrompt) {
@@ -314,10 +319,7 @@ function MainChat(props) {
     <div className="min-w-[92%] md:min-w-[92%] max-w-[92%] md:max-w-[92%] lg:min-w-[80%] md:max-w-[80%] h-full px-[10px] md:px-[30px] py-[10px] md:py-[30px] bg-black-600 flex flex-col justify-between">
       {/* Top Bar */}
       <div className="top-bar flex pb-3 px-5 justify-between items-center border-b-[1px] border-white-100 min-h-[7%] max-h-[7%]">
-        <h1 className="text-[14px] md:text-[20px] font-bold text-white">
-          Ask me Friendly
-          {/* <span className="text-indigo-200"> Uploaded Doc</span> */}
-        </h1>
+      
         <FaRegTrashCan
           className={`text-white text-[30px] md:text-[40px] bg-gray-700 p-2 rounded-[7px] ${
             messageList?.length === 0 ? "cursor-not-allowed" : "cursor-pointer"
@@ -325,6 +327,14 @@ function MainChat(props) {
           disabled={messageList?.length === 0}
           onClick={() => clearChat()}
         />
+        <div>
+        <FaGear className={`text-white text-[30px] md:text-[40px] bg-gray-700 p-2 rounded-[7px] `} onClick={()=> {
+          showPopUp(!popUp)
+          console.log(popUp);
+          
+        }} />
+        {popUp === true ? <PopUp /> : null}
+        </div>
       </div>
 
       {/* Message List */}

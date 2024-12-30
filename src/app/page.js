@@ -1,7 +1,7 @@
 "use client"
-import MainChat from "@/components/chat/MainChat";
-import SideBar from "@/components/chat/Sidebar";
-import Signup from "@/components/chat/signup"; 
+import MainChat from "../components/chat/MainChat";
+import SideBar from "../components/chat/Sidebar";
+
 import { useState } from "react";
 
 export default function Home() {
